@@ -1,0 +1,16 @@
+.navbar-root {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #ffffff;
+}
+
+.navbar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  max-width: 1080px;
+  margin: auto;
+  height: 100%;
+}

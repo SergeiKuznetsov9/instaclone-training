@@ -1,0 +1,9 @@
+.layout-root {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+
+.layout-body {
+  max-width: 1080px;
+  margin: auto;
+}

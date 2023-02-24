@@ -1,0 +1,26 @@
+.user-badge-root {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-badge-avatar {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.user-badge-placeholder {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background-color: #efefef;
+}
+
+.user-badge-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #000000;
+}
