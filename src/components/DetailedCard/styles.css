@@ -1,0 +1,57 @@
+.detailedCard-root {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    border: 1px solid #dbdbdb;
+    box-shadow: 0 2px 4px #00000033;
+}
+
+.detailedCard-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 60px;
+    margin-left: 20px;
+    background-color: #ffffff;
+}
+
+.detailedCard-img {
+    height: 300px;
+    width: 100%;    
+}
+
+.detailedCard-buttons {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+}
+
+.detailedCard-buttons > svg {
+    cursor: pointer;
+}
+
+.detailedCard-likes {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.detailedCard-comments {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 10px 10px;
+}
+
+.detailedCard-showComments {
+    font-size: 14px;
+    color: grey;
+    cursor: pointer;
+}
+
+.detailedCard-textarea {
+    border: none;
+    background-color: white;
+    padding: 10px;
+    outline: none;
+    resize: none;
+}

@@ -1,0 +1,10 @@
+.comment-root {
+    display: flex;
+    align-items: center;
+}
+
+.comment-name {
+    font-size: 14px;
+    font-weight: 500px;
+    margin-right: 5px;
+}
