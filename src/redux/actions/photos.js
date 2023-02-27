@@ -1,10 +1,10 @@
 import { api } from "../../api";
 import { getPhotosFailed, getPhotosStarted, getPhotosSuccess } from "../actionCreators/photos";
 
-export const getPhotos = () => {
+export const getPhotosThunk = () => {
   return async (dispatch) => {
     try {
-      dispatch(getPhotosStarted)
+      dispatch(getPhotosStarted())
       const res = await api.photos.getPhotos({
         params: {
           _page: 0,

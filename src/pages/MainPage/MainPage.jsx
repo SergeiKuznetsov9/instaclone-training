@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DetailedCard from "../../components/DetailedCard";
-import Layout from "../../components/Layout";
-import { getPhotos } from "../../redux/actions/photos";
+import { DetailedCard } from "../../components/DetailedCard";
+import { Layout } from "../../components/Layout";
+import { getPhotosThunk } from "../../redux/actions/photos";
 
 const commentsArr = [
   { id: 1, nickname: "Sergei", text: "Ajtxcvsaghcvel vbgj das ilwbavwd" },
@@ -18,7 +18,7 @@ export const MainPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPhotos());
+    dispatch(getPhotosThunk());
   }, []);
 
   return (
@@ -36,5 +36,3 @@ export const MainPage = () => {
     </Layout>
   );
 };
-
-export default MainPage;

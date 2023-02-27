@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 
-const UserBadge = ({ nickName, avatarUrl, id }) => {
+export const UserBadge = ({ nickName, avatarUrl, id }) => {
 
   const navigate = useNavigate();
 
@@ -20,5 +20,3 @@ const UserBadge = ({ nickName, avatarUrl, id }) => {
     </div>
   );
 };
-
-export default UserBadge;

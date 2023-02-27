@@ -1,7 +1,7 @@
-import Navbar from "../Navbar";
+import { Navbar } from "../Navbar";
 import "./styles.css";
 
-const Layout = ({ nickName, avatarUrl, id, children }) => {
+export const Layout = ({ nickName, avatarUrl, id, children }) => {
   return (
     <div className="layout-root">
       <div>
@@ -11,5 +11,3 @@ const Layout = ({ nickName, avatarUrl, id, children }) => {
     </div>
   );
 };
-
-export default Layout;

@@ -1,7 +1,7 @@
-import UserBadge from "../UserBadge";
+import { UserBadge } from "../UserBadge";
 import "./styles.css";
 
-const Navbar = ({nickName, avatarUrl, id}) => {
+export const Navbar = ({nickName, avatarUrl, id}) => {
   return (
     <div className="navbar-root">
       <div className="navbar-wrapper">
@@ -11,5 +11,3 @@ const Navbar = ({nickName, avatarUrl, id}) => {
     </div>
   );
 };
-
-export default Navbar;

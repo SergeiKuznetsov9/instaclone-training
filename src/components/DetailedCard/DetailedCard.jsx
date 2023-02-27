@@ -1,14 +1,12 @@
-import UserBadge from "../UserBadge";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import "./styles.css";
-import { Comment } from "../Comment";
 import { useState } from "react";
+import { UserBadge } from "../UserBadge";
+import { Comment } from "../Comment";
 
-
-
-const DetailedCard = ({
+export const DetailedCard = ({
   userId,
   userName,
   avatarUrl,
@@ -17,7 +15,6 @@ const DetailedCard = ({
   isLikedByYou,
   comments,
 }) => {
-
   const [isShownAllComments, setIsShownAllComments] = useState(false);
 
   const renderComments = (comments) => {
@@ -31,7 +28,10 @@ const DetailedCard = ({
       <>
         {comments.length === 0 && <span>Комментариев пока нет</span>}
         {comments.length > 2 && (
-          <span className="detailedCard-showComments" onClick={() => setIsShownAllComments(true)}>
+          <span
+            className="detailedCard-showComments"
+            onClick={() => setIsShownAllComments(true)}
+          >
             Показать еще {comments.length - commentsForRender.length}{" "}
             комментариев
           </span>
@@ -63,5 +63,3 @@ const DetailedCard = ({
     </div>
   );
 };
-
-export default DetailedCard;

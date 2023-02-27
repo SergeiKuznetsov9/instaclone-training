@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const Comment = ({ nickname, text }) => {
+export const Comment = ({ nickname, text }) => {
   return (
     <div className="comment-root">
       <span className="comment-name">{nickname}</span>
@@ -8,5 +8,3 @@ const Comment = ({ nickname, text }) => {
     </div>
   );
 };
-
-export { Comment };
