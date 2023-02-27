@@ -5,6 +5,7 @@ import "./styles.css";
 import { useState } from "react";
 import { UserBadge } from "../UserBadge";
 import { Comment } from "../Comment";
+import classNames from "classnames";
 
 export const DetailedCard = ({
   userId,
@@ -14,6 +15,7 @@ export const DetailedCard = ({
   likes,
   isLikedByYou,
   comments,
+  className
 }) => {
   const [isShownAllComments, setIsShownAllComments] = useState(false);
 
@@ -37,20 +39,19 @@ export const DetailedCard = ({
           </span>
         )}
 
-        {commentsForRender.map((comment) => {
-          const { id, ...props } = comment;
-          return <Comment key={id} {...props} />;
+        {commentsForRender.map((comment, index) => {
+          return <Comment key={index} {...comment} />;
         })}
       </>
     );
   };
 
   return (
-    <div className="detailedCard-root">
+    <div className={classNames("detailedCard-root", className)}>
       <div className="detailedCard-header">
         <UserBadge nickName={userName} avatarUrl={avatarUrl} id={userId} />
       </div>
-      <div>
+      <div className="detailedCard-img-container">
         <img src={imageUrl} alt="postImg" className="detailedCard-img" />
       </div>
       <div className="detailedCard-buttons">

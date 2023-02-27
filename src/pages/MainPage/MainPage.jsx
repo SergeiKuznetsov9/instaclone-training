@@ -1,38 +1,64 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Bars } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { DetailedCard } from "../../components/DetailedCard";
 import { Layout } from "../../components/Layout";
 import { getPhotosThunk } from "../../redux/actions/photos";
-
-const commentsArr = [
-  { id: 1, nickname: "Sergei", text: "Ajtxcvsaghcvel vbgj das ilwbavwd" },
-  { id: 2, nickname: "Dima", text: "Wvf sdvcedel vbgj das ilwvd vwd" },
-  { id: 3, nickname: "Petr", text: "Kcdagsj vcrgxw, cwvgd" },
-  { id: 4, nickname: "Nick", text: "K vdsv sj vcrgxw, cwvgd" },
-];
+import "./styles.css";
 
 export const MainPage = () => {
-  const state = useSelector((state) => state);
-  console.log(state);
+  const photos = useSelector((state) => state.photos.photos);
+  const isLoading = useSelector((state) => state.photos.isPhotosLoading);
+  const totalPhotos = useSelector((state) => state.photos.totalPhotos);
 
   const dispatch = useDispatch();
 
+  const [pageNumber, setPageNumber] = useState(1);
+
   useEffect(() => {
-    dispatch(getPhotosThunk());
-  }, []);
+    dispatch(getPhotosThunk(pageNumber));
+  }, [pageNumber]);
+
+  const nextHandler = () => {
+    setPageNumber(pageNumber + 1);
+  };
 
   return (
     <Layout nickName="Sergei" id={1}>
-      <div>MainPage</div>
-      <DetailedCard
-        userId={1}
-        userName="Serj"
-        avatarUrl=""
-        imageUrl="https://pixy.org/src2/649/6499176.jpg"
-        likes={5}
-        isLikedByYou={false}
-        comments={commentsArr}
-      />
+      <div className="mainPage-root">
+        {isLoading ? (
+          <div className="mainPage-loaderContainer">
+            <Bars color="indigo" height={80} width={80} />
+          </div>
+        ) : (
+          <InfiniteScroll
+            dataLength={photos.length}
+            next={nextHandler}
+            hasMore={totalPhotos > photos.length}
+            loader={
+              <div className="mainPage-loaderContainer">
+                <Bars color="indigo" height={15} width={15} />
+              </div>
+            }
+            endMessage={<p className="mainPage-loaderContainer">Thats all!</p>}
+          >
+            {photos.map(({ author, imgUrl, likes, comments, id }) => (
+              <DetailedCard
+                key={id}
+                userId={author.id}
+                userName={author.nickname}
+                avatarUrl={author.avatarUrl}
+                imageUrl={imgUrl}
+                likes={likes.length}
+                isLikedByYou={false}
+                comments={comments}
+                className="mainPage-card"
+              />
+            ))}
+          </InfiniteScroll>
+        )}
+      </div>
     </Layout>
   );
 };

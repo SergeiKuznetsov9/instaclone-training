@@ -1,12 +1,14 @@
 import {
-    GET_PHOTOS_FAILED,
+  GET_PHOTOS_FAILED,
   GET_PHOTOS_STARTED,
   GET_PHOTOS_SUCCESS,
+  GET_PHOTOS_SET_TOTAL,
 } from "../actionCreators/photos";
 
 const initialState = {
   photos: [],
   isPhotosLoading: false,
+  totalPhotos: 0,
 };
 
 export const photosReducer = (state = initialState, action) => {
@@ -30,7 +32,13 @@ export const photosReducer = (state = initialState, action) => {
         isPhotosLoading: false,
       };
 
+    case GET_PHOTOS_SET_TOTAL:
+      return {
+        ...state,
+        totalPhotos: action.payload,
+      };
+
     default:
-        return {...state}
+      return { ...state };
   }
 };

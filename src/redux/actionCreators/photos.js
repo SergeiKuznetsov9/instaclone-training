@@ -1,17 +1,23 @@
-export const GET_PHOTOS_SUCCESS = 'GET_PHOTOS_SUCCESS';
-export const GET_PHOTOS_FAILED = 'GET_PHOTOS_FAILED';
-export const GET_PHOTOS_STARTED = 'GET_PHOTOS_STARTED';
+export const GET_PHOTOS_SUCCESS = "GET_PHOTOS_SUCCESS";
+export const GET_PHOTOS_FAILED = "GET_PHOTOS_FAILED";
+export const GET_PHOTOS_STARTED = "GET_PHOTOS_STARTED";
+export const GET_PHOTOS_SET_TOTAL = "GET_PHOTOS_SET_TOTAL";
 
 export const getPhotosSuccess = (photos) => ({
-    type: GET_PHOTOS_SUCCESS,
-    payload: photos
-})
+  type: GET_PHOTOS_SUCCESS,
+  payload: photos,
+});
 
 export const getPhotosFailed = (error) => ({
-    type: GET_PHOTOS_FAILED,
-    payload: error,
-})
+  type: GET_PHOTOS_FAILED,
+  payload: error,
+});
 
 export const getPhotosStarted = () => ({
-    type: GET_PHOTOS_STARTED,
-})
+  type: GET_PHOTOS_STARTED,
+});
+
+export const getPhotosSetTotal = (total) => ({
+  type: GET_PHOTOS_SET_TOTAL,
+  payload: total,
+});
