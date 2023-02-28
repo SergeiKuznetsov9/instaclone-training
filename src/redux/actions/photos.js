@@ -49,7 +49,6 @@ export const toggleLike = (userId, photoId) => {
     } else {
       newPhoto.likes.push(userId);
     }
-    console.log(newPhoto);
 
     try {
       const response = await api.photos.mutatePhoto({

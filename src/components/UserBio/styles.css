@@ -1,0 +1,44 @@
+.userBio-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userBio-avatarContainer {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  margin-right: 35px;
+  overflow: hidden;
+}
+
+.userBio-avatarContainer > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userBio-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.userBio-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.userBio-nickname {
+  font-weight: 600;
+  font-size: 27px;
+  margin-right: 10px;
+}
+
+.userBio-counter {
+  margin-right: 10px;
+}
+
+.userBio-name {
+  font-weight: 600;
+}

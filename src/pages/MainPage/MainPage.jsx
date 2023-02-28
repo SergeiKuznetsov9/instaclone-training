@@ -27,7 +27,11 @@ export const MainPage = () => {
   };
 
   return (
-    <Layout nickName={authorizedUser.nickname} id={1}>
+    <Layout
+      nickName={authorizedUser.nickname}
+      id={1}
+      avatarUrl={authorizedUser.avatarUrl}
+    >
       <div className="mainPage-root">
         {isLoading ? (
           <div className="mainPage-loaderContainer">
