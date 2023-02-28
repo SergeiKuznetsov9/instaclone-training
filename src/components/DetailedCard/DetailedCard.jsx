@@ -6,8 +6,8 @@ import { useState } from "react";
 import { UserBadge } from "../UserBadge";
 import { Comment } from "../Comment";
 import classNames from "classnames";
-import { mutatePhotoThunk } from "../../redux/actions/photos";
-import { useDispatch } from "react-redux";
+import { sendComment, toggleLike } from "../../redux/actions/photos";
+import { useDispatch, useSelector } from "react-redux";
 
 export const DetailedCard = ({
   userId,
@@ -19,13 +19,20 @@ export const DetailedCard = ({
   comments,
   className,
   authorizedUserId,
+  authorizedUserNickname,
   cardId,
 }) => {
   const [isShownAllComments, setIsShownAllComments] = useState(false);
+  const [commentText, setCommentText] = useState("");
   const dispatch = useDispatch();
+  const isMutateLoading = useSelector((state) => state.photos.isMutateLoading);
 
   const handlerLike = (authorizedUserId, cardId) => {
-    dispatch(mutatePhotoThunk(authorizedUserId, cardId));
+    dispatch(toggleLike(authorizedUserId, cardId));
+  };
+
+  const handleSendComment = (commentText) => {
+    dispatch(sendComment(authorizedUserNickname, cardId, commentText));
   };
 
   const renderComments = (comments) => {
@@ -75,7 +82,21 @@ export const DetailedCard = ({
       </div>
       <div className="detailedCard-likes">{`Оценили ${likes} человек`}</div>
       <div className="detailedCard-comments">{renderComments(comments)}</div>
-      <textarea className="detailedCard-textarea" />
+      <div className="detailedCard-textarea-wrapper">
+        <textarea
+          placeholder="Введите комментарий"
+          className="detailedCard-textarea"
+          value={commentText}
+          onChange={(event) => setCommentText(event.target.value)}
+        />
+        <button
+          disabled={isMutateLoading || commentText.length === 0}
+          className="detailedCard-textarea-sendButton"
+          onClick={() => handleSendComment(commentText)}
+        >
+          Отправить
+        </button>
+      </div>
     </div>
   );
 };

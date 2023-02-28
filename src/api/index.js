@@ -5,9 +5,9 @@ export const api = {
   photos: {
     getPhotos,
     mutatePhoto,
-
   },
+
   users: {
     getUser,
-  }
+  },
 };

@@ -19,7 +19,6 @@ export const MainPage = () => {
 
   useEffect(() => {
     dispatch(getPhotosThunk(pageNumber));
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
@@ -58,6 +57,7 @@ export const MainPage = () => {
                 comments={comments}
                 className="mainPage-card"
                 authorizedUserId={authorizedUser.id}
+                authorizedUserNickname={authorizedUser.nickname}
                 cardId={id}
               />
             ))}

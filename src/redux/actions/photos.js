@@ -1,4 +1,5 @@
 import { api } from "../../api";
+import { buildCardsArrayForDispatch, getCardFromArrayById } from "../../utils";
 import {
   getPhotosFailed,
   getPhotosStarted,
@@ -37,38 +38,57 @@ export const getPhotosThunk = (page = 1) => {
   };
 };
 
-export const mutatePhotoThunk = (userId, photoId) => {
+export const toggleLike = (userId, photoId) => {
   return async (dispatch, getState) => {
     dispatch(mutatePhotoStarted());
 
-    
-    const targetPhoto = getState().photos.photos.find(
-      (photo) => photo.id === photoId
-      );
-      const newPhoto = {
-        ...targetPhoto,
-        likes: [...targetPhoto.likes],
-      };
-      
-      if (newPhoto.likes.includes(userId)) {
-        newPhoto.likes = newPhoto.likes.filter((like) => like !== userId);
-      } else {
-        newPhoto.likes.push(userId);
-      }
+    const newPhoto = getCardFromArrayById(getState().photos.photos, photoId);
+
+    if (newPhoto.likes.includes(userId)) {
+      newPhoto.likes = newPhoto.likes.filter((like) => like !== userId);
+    } else {
+      newPhoto.likes.push(userId);
+    }
+    console.log(newPhoto);
 
     try {
-
       const response = await api.photos.mutatePhoto({
         data: newPhoto,
-        url: `/${photoId}`
+        url: `/${photoId}`,
       });
 
-      const newPhotos = [...getState().photos.photos]
-      const photoIndex = newPhotos.findIndex(photo => photo.id === photoId)
-      newPhotos[photoIndex] = response.data
+      const newArray = buildCardsArrayForDispatch(
+        getState().photos.photos,
+        response.data
+      );
 
-      dispatch(getPhotosSuccess(newPhotos))
+      dispatch(getPhotosSuccess(newArray));
+      dispatch(mutatePhotoSuccess());
+    } catch (error) {
+      dispatch(mutatePhotoFailed(error));
+    }
+  };
+};
 
+export const sendComment = (nickname, cardId, text) => {
+  return async (dispatch, getState) => {
+    dispatch(mutatePhotoStarted());
+
+    const newCard = getCardFromArrayById(getState().photos.photos, cardId);
+    newCard.comments.push({ nickname, text });
+
+    try {
+      const response = await api.photos.mutatePhoto({
+        data: newCard,
+        url: `/${cardId}`,
+      });
+
+      const newArray = buildCardsArrayForDispatch(
+        getState().photos.photos,
+        response.data
+      );
+
+      dispatch(getPhotosSuccess(newArray));
       dispatch(mutatePhotoSuccess());
     } catch (error) {
       dispatch(mutatePhotoFailed(error));

@@ -24,7 +24,7 @@ export const getAuthorizedUserThunk = () => {
   return async (dispatch) => {
     try {
       dispatch(getUserStarted());
-      const response = await api.users.getUser(1);
+      const response = await api.users.getUser(3);
       dispatch(getAuthorizedUserSuccess(response.data));
     } catch (error) {
       dispatch(getUserFailed(error));
