@@ -11,6 +11,7 @@ export const MainPage = () => {
   const photos = useSelector((state) => state.photos.photos);
   const isLoading = useSelector((state) => state.photos.isPhotosLoading);
   const totalPhotos = useSelector((state) => state.photos.totalPhotos);
+  const authorizedUser = useSelector((state) => state.users.authorizedUser);
 
   const dispatch = useDispatch();
 
@@ -18,6 +19,8 @@ export const MainPage = () => {
 
   useEffect(() => {
     dispatch(getPhotosThunk(pageNumber));
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
   const nextHandler = () => {
@@ -25,7 +28,7 @@ export const MainPage = () => {
   };
 
   return (
-    <Layout nickName="Sergei" id={1}>
+    <Layout nickName={authorizedUser.nickname} id={1}>
       <div className="mainPage-root">
         {isLoading ? (
           <div className="mainPage-loaderContainer">
@@ -41,7 +44,7 @@ export const MainPage = () => {
                 <Bars color="indigo" height={15} width={15} />
               </div>
             }
-            endMessage={<p className="mainPage-loaderContainer">Thats all!</p>}
+            endMessage={<p className="mainPage-thatsAll">Thats all!</p>}
           >
             {photos.map(({ author, imgUrl, likes, comments, id }) => (
               <DetailedCard
@@ -51,9 +54,11 @@ export const MainPage = () => {
                 avatarUrl={author.avatarUrl}
                 imageUrl={imgUrl}
                 likes={likes.length}
-                isLikedByYou={false}
+                isLikedByYou={likes.includes(authorizedUser.id)}
                 comments={comments}
                 className="mainPage-card"
+                authorizedUserId={authorizedUser.id}
+                cardId={id}
               />
             ))}
           </InfiniteScroll>

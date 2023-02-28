@@ -6,6 +6,8 @@ import { useState } from "react";
 import { UserBadge } from "../UserBadge";
 import { Comment } from "../Comment";
 import classNames from "classnames";
+import { mutatePhotoThunk } from "../../redux/actions/photos";
+import { useDispatch } from "react-redux";
 
 export const DetailedCard = ({
   userId,
@@ -15,9 +17,16 @@ export const DetailedCard = ({
   likes,
   isLikedByYou,
   comments,
-  className
+  className,
+  authorizedUserId,
+  cardId,
 }) => {
   const [isShownAllComments, setIsShownAllComments] = useState(false);
+  const dispatch = useDispatch();
+
+  const handlerLike = (authorizedUserId, cardId) => {
+    dispatch(mutatePhotoThunk(authorizedUserId, cardId));
+  };
 
   const renderComments = (comments) => {
     const commentsForRender = [...comments];
@@ -55,7 +64,13 @@ export const DetailedCard = ({
         <img src={imageUrl} alt="postImg" className="detailedCard-img" />
       </div>
       <div className="detailedCard-buttons">
-        {isLikedByYou ? <FavoriteIcon /> : <FavoriteBorderOutlinedIcon />}
+        {isLikedByYou ? (
+          <FavoriteIcon onClick={() => handlerLike(authorizedUserId, cardId)} />
+        ) : (
+          <FavoriteBorderOutlinedIcon
+            onClick={() => handlerLike(authorizedUserId, cardId)}
+          />
+        )}
         <ChatBubbleOutlineIcon />
       </div>
       <div className="detailedCard-likes">{`Оценили ${likes} человек`}</div>
