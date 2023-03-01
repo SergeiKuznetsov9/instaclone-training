@@ -4,3 +4,16 @@
   align-items: center;
   padding-top: 20px;
 }
+
+.userPage-content {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 100px;
+  padding-left: 10px;
+  width: 930px;
+}
+
+.userPage-card {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
